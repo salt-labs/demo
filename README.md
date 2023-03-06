@@ -10,6 +10,7 @@ Different branches have different samples.
 | :------------------------- | :---------------------------------------------- |
 | trunk                      | Docs only                                       |
 | containers/dockerfile      | A simple Dockerfile                             |
+| containers/dockerfile-cwe  | A Dockerfile with known CWEs.                   |
 | containers/dockerfile-cve  | A Dockerfile with known CVEs.                   |
 | containers/language-go     | A simple Go program packaged as a container.    |
 | containers/language-rust   | A simple Rust program packaged as a container   |
