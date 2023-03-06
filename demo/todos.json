@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "title": "To do list item 1",
+        "note": "This was done by the Gopher.",
+        "done": true
+    },
+
+    {
+        "id": 2,
+        "title": "Remove XSS",
+        "note": "<script>alert(‘xss’)</script>",
+        "done": false
+    }
+
+]

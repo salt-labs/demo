@@ -1,0 +1,24 @@
+
+extraction:
+
+  go:
+
+    prepare:
+      packages:
+        - htop                  # Hypothetical dependency required for all Golang projects
+        #- gotop                # For testing, include a package that does not exist
+
+    #after_prepare:
+    #  - export GNU_MAKE=make
+    #  - export GIT=true
+
+    #configure:
+    #  command:
+    #    - ./prepare-go.sh
+
+    #before_index:
+    #  - export TARGET_DIR=$LGTM_SRC/target
+
+    index:
+      build_command:
+        - go build ./...

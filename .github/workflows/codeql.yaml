@@ -1,0 +1,72 @@
+##################################################
+# Name: codeql.yaml
+# Description: Workflow for GitHub Code Scanning
+##################################################
+
+##################################################
+# NOTES:
+#       Reference: https://git.io/JJfzT
+##################################################
+
+name: CodeQL
+
+on:
+
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+
+    # NOTE: Disabled for demo
+    #- cron: '0 0 * * 0'
+
+jobs:
+
+  ##################################################
+  # Description:
+  #
+  # Run CodeQL against the project
+  ##################################################
+
+  CodeQL:
+
+    name: Run CodeQL
+
+    runs-on: ${{ matrix.os }}
+
+    timeout-minutes: 30
+    continue-on-error: false
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+
+    steps:
+
+      - id: checkout_repository
+        name: Checkout repository
+        uses: actions/checkout@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          persist-credentials: true
+          submodules: true
+
+      - id: codeql_init
+        name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: go
+
+      - id: codeql_scan
+        name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
+
+      - id: codeql_sarif
+        name: Display SARIF results
+        if: ${{ env.ACTIONS_STEP_DEBUG }}
+        shell: pwsh
+        run: |
+          Get-Content "../results/*.sarif"
